@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
 import './App.css';
 import '../node_modules/bulma/css/bulma.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
@@ -13,10 +15,10 @@ class App extends Component {
     constructor(props) {
         super(props)
         const categories = [
-            {name: 'all', path:''},
-            {name: 'react', path:'react'},
-            {name: 'redux', path:'redux'},
-            {name: 'udacity', path:'udacity'},
+            {name: 'all', path: ''},
+            {name: 'react', path: 'react'},
+            {name: 'redux', path: 'redux'},
+            {name: 'udacity', path: 'udacity'},
         ]
 
         const posts = [
@@ -81,4 +83,9 @@ class App extends Component {
     }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+    posts: state.posts,
+    categories: state.categories
+})
+
+export default connect(mapStateToProps)(App);
