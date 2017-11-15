@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {
+    Route
+} from 'react-router-dom'
 
 import './App.css';
 import '../node_modules/bulma/css/bulma.css';
@@ -77,7 +80,12 @@ class App extends Component {
                 />
                 <ListSorter sortCriterias={['Votes', 'Date']} handleSorting={this.sortList}/>
                 <br/>
-                <PostList posts={this.state.posts}/>
+                <Route exact path="/" render={() => (
+                    <PostList posts={this.state.posts} category={this.state.active}/>
+                )}/>
+                <Route path="/:categoryId" render={() => (
+                    <PostList posts={this.state.posts} category={this.state.active}/>
+                )}/>
             </div>
         );
     }
