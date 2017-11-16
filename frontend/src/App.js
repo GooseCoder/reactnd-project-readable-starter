@@ -33,7 +33,7 @@ class App extends Component {
         this.setState({
             active: category
         })
-        this.props.store.dispatch(loadPostsByCategory(category));
+        // this.props.store.dispatch(loadPostsByCategory(category));
     }
 
     sortList = (e) => {
