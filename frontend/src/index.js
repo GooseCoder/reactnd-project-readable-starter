@@ -11,12 +11,17 @@ import './index.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import initialState from './InitialState'
+import {loadCategories} from "./actions/CategoriesActions";
+import {loadAllPosts} from "./actions/PostsActions";
 
 const store = createStore(
     rootReducer,
     initialState,
     applyMiddleware(thunk)
 )
+
+store.dispatch(loadCategories());
+store.dispatch(loadAllPosts());
 
 ReactDOM.render(
     <Provider store={store}>
