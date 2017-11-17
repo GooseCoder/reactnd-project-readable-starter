@@ -23,7 +23,7 @@ class PostsApi {
         return this.instance.get('/' + category.name + '/posts')
             .then(function (response) {
                 console.log(response.data)
-                return response.data.posts
+                return response.data
             }).catch(function (error) {
                 console.log(error)
             })

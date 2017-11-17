@@ -12,7 +12,7 @@ import Header from './Header'
 import CategoriesBar from './CategoriesBar'
 import ListSorter from './ListSorter'
 import PostList from './PostList'
-import {loadPostsByCategory} from "./actions/PostsActions";
+import {loadAllPosts, loadPostsByCategory} from "./actions/PostsActions";
 
 class App extends Component {
 
@@ -31,9 +31,13 @@ class App extends Component {
 
     selectCategory = (category) => {
         this.setState({
-            active: category
+            active: category.name
         })
-        // this.props.store.dispatch(loadPostsByCategory(category));
+        if (category.name === 'all') {
+            this.props.loadAllPosts()
+        } else {
+            this.props.loadPostsByCategory(category);
+        }
     }
 
     sortList = (e) => {
@@ -67,4 +71,15 @@ const mapStateToProps = (state) => ({
     categories: state.categories
 })
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => {
+    return {
+        loadPostsByCategory: (category) => dispatch(
+            loadPostsByCategory(category)
+        ),
+        loadAllPosts: () => dispatch(
+            loadAllPosts()
+        )
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
