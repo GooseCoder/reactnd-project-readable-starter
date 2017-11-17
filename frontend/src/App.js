@@ -10,23 +10,25 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 import Header from './Header'
 import CategoriesBar from './CategoriesBar'
-import ListSorter from './ListSorter'
+import ToolBar from './ToolBar'
 import PostList from './PostList'
 import {loadAllPosts, loadPostsByCategory} from "./actions/PostsActions";
+import PostForm from "./PostForm";
 
 class App extends Component {
 
     constructor(props) {
         super(props)
 
-        const active = 'all'
-
         this.state = {
-            active
+            active: 'all',
+            showPostForm: false
         }
 
         this.selectCategory = this.selectCategory.bind(this)
-        this.sortList = this.sortList.bind(this)
+        this.closePostForm = this.closePostForm.bind(this)
+        this.showPostForm = this.showPostForm.bind(this)
+        this.sortPostList = this.sortPostList.bind(this)
     }
 
     selectCategory = (category) => {
@@ -40,7 +42,20 @@ class App extends Component {
         }
     }
 
-    sortList = (e) => {
+    showPostForm = () => {
+        console.log('papas')
+        this.setState({
+            showPostForm: true
+        })
+    }
+
+    closePostForm = () => {
+        this.setState({
+            showPostForm: false
+        })
+    }
+
+    sortPostList = () => {
         console.log('sorting')
     }
 
@@ -53,8 +68,13 @@ class App extends Component {
                     active={this.state.active}
                     handleSelect={this.selectCategory}
                 />
-                <ListSorter sortCriterias={['Votes', 'Date']} handleSorting={this.sortList}/>
+                <ToolBar
+                    sortCriterias={['Votes', 'Date']}
+                    handleSorting={this.sortPostList}
+                    handleShowForm={this.showPostForm}
+                />
                 <br/>
+                <PostForm show={this.state.showPostForm} handleCloseForm={this.closePostForm}/>
                 <Route exact path="/" render={() => (
                     <PostList posts={this.props.posts} category={this.state.active}/>
                 )}/>

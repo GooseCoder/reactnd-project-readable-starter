@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Post = ({title, body, author, category, voteScore}) => {
+const PostItem = ({title, body, author, category, voteScore}) => {
     return (
         <div className="card">
             <div className="card-content">
@@ -34,4 +34,4 @@ const Post = ({title, body, author, category, voteScore}) => {
     )
 }
 
-export default Post
+export default PostItem
