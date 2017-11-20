@@ -16,7 +16,6 @@ class PostList extends React.Component {
         }
         this.sortPosts = this.sortPosts.bind(this)
         this.handleDeletePost = this.handleDeletePost.bind(this)
-        this.handleVotePost = this.handleVotePost.bind(this)
         this.handleSelectCategory = this.handleSelectCategory.bind(this)
     }
 
@@ -32,11 +31,6 @@ class PostList extends React.Component {
     handleDeletePost = (post) => {
         // this.props.dispatch(deletePost(post))
         console.log('deleting')
-    }
-
-    handleVotePost = (id, vote) => {
-        // this.props.dispatch(votePost(id, vote))
-        console.log('voting')
     }
 
     handleSelectCategory = (category) => {
@@ -71,7 +65,6 @@ class PostList extends React.Component {
                 <div className="container is-fluid">
                     {processedPosts.map(post => (
                         <PostItem key={post.id} {...post}
-                            handleVotePost={this.handleVotePost}
                             handleDeletePost={this.handleDeletePost}
                         />
                     ))}

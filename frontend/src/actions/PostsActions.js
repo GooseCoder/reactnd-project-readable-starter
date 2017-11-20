@@ -9,6 +9,10 @@ export function loadPostSuccess(currentPost) {
     return {type: types.LOAD_POST_SUCCESS, currentPost};
 }
 
+export function votePostSuccess(post) {
+    return {type: types.VOTE_POST_SUCCESS, post};
+}
+
 export function loadPost(postId) {
     // make async call to api, handle promise, dispatch action when promise is resolved
     return function(dispatch) {
@@ -43,4 +47,15 @@ export function loadPostsByCategory(category) {
             throw(error);
         });
     };
+}
+
+export function votePost(id, vote) {
+    return function(dispatch) {
+        const postsApi = new PostsApi()
+        return postsApi.votePost(id, vote).then(post => {
+            dispatch(votePostSuccess(post));
+        }).catch(error => {
+            throw(error);
+        });
+    }
 }

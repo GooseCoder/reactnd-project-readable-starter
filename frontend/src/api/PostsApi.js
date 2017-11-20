@@ -35,6 +35,18 @@ class PostsApi {
                 console.log(error)
             })
     }
+
+    votePost(id, vote) {
+        return this.instance.post('/posts/' + id, {
+                option: vote
+            })
+            .then(function (response) {
+                console.log('voted', response.data)
+                return response.data
+            }).catch(function (error) {
+                console.log(error)
+            })
+    }
 }
 
 export default PostsApi

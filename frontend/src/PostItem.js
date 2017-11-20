@@ -1,91 +1,104 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import moment from 'moment'
 import {
     Link
 } from 'react-router-dom'
 
-const PostItem = ({title, body, author, category, voteScore, timestamp, id, handleVotePost}) => {
-    return (
-        <div className="card">
-            <div className="card-content">
-                <div className="media">
-                    <div className="media-left">
-                        <div className="level">
-                            <div className="level-left">
-                                <div className="level-item vote-count-positive is-size-4">
-                                    {voteScore}
-                                </div>
-                                <div className="level-item fa fa-stack">
-                                    <a onClick={() => handleVotePost(id, -1)} >
-                                        <i
-                                            className="fa fa-caret-down fa-2x"
-                                            aria-hidden="true"
-                                        />
-                                    </a>
-                                    <a onClick={() => handleVotePost(id, 1)} >
-                                        <i
-                                            className="fa fa-caret-up fa-2x"
-                                            aria-hidden="true"
-                                        />
-                                    </a>
+import {loadPost, votePost} from "./actions/PostsActions";
+
+
+class PostItem extends React.Component {
+
+    handleVotePost = (id, vote) => {
+        this.props.dispatch(votePost(id, vote))
+        this.props.dispatch(loadPost(id))
+    }
+
+    render = () => {
+        const {title, body, author, category, voteScore, timestamp, id} = this.props
+        return (
+            <div className="card">
+                <div className="card-content">
+                    <div className="media">
+                        <div className="media-left">
+                            <div className="level">
+                                <div className="level-left">
+                                    <div className="level-item vote-count-positive is-size-4">
+                                        {voteScore}
+                                    </div>
+                                    <div className="level-item fa fa-stack">
+                                        <a onClick={() => this.handleVotePost(id, 'downVote')} >
+                                            <i
+                                                className="fa fa-caret-down fa-2x"
+                                                aria-hidden="true"
+                                            />
+                                        </a>
+                                        <a onClick={() => this.handleVotePost(id, 'upVote')} >
+                                            <i
+                                                className="fa fa-caret-up fa-2x"
+                                                aria-hidden="true"
+                                            />
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div className="media-content">
+                            <p className="title is-4">
+                                <Link onClick={() => {console.log('from here')}} to={`/posts/${id}`}>
+                                    {title}
+                                </Link>
+                            </p>
+                            <p className="subtitle is-6">by {author}</p>
+                        </div>
+                        <div className="media-right">
+                            {moment(timestamp).format('MMMM Do YYYY, h:mm:ss a')}
+                        </div>
                     </div>
-                    <div className="media-content">
-                        <p className="title is-4">
-                            <Link onClick={() => {console.log('from here')}} to={`/posts/${id}`}>
-                                {title}
-                            </Link>
-                        </p>
-                        <p className="subtitle is-6">by {author}</p>
-                    </div>
-                    <div className="media-right">
-                        {moment(timestamp).format('MMMM Do YYYY, h:mm:ss a')}
-                    </div>
-                </div>
 
-                <div className="content">
-                    {body}
-                    <br/>
-                    <div className="tags">
-                        <span className="tag">{category}</span>
+                    <div className="content">
+                        {body}
+                        <br/>
+                        <div className="tags">
+                            <span className="tag">{category}</span>
+                        </div>
                     </div>
-                </div>
 
-                <div className="level">
-                    <div className="level-left">
-                        <Link className="button is-light" to={`/posts/${id}`}>
+                    <div className="level">
+                        <div className="level-left">
+                            <Link className="button is-light" to={`/posts/${id}`}>
                             <span className="icon">
                                 <i className="fa fa-comment"/>
                             </span>
-                            <span>
+                                <span>
                                 Comment
                             </span>
-                        </Link>
-                    </div>
-                    <div className="level-right">
-                        <a className="button is-light">
+                            </Link>
+                        </div>
+                        <div className="level-right">
+                            <a className="button is-light">
                             <span className="icon">
                                 <i className="fa fa-remove"/>
                             </span>
-                            <span>
+                                <span>
                                 Delete
                             </span>
-                        </a>
-                        <a className="button is-light">
+                            </a>
+                            <a className="button is-light">
                             <span className="icon">
                                 <i className="fa fa-edit"/>
                             </span>
-                            <span>
+                                <span>
                                 Edit
                             </span>
-                        </a>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
-export default PostItem
+export default connect()(PostItem)
