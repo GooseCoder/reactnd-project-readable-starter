@@ -20,9 +20,9 @@ class App extends Component {
                 <Header title="Readable" company="Gustavo Adolfo Cruz"/>
                 <br/>
                 <Switch>
+                    <Route exact path="/createPost" component={PostForm}/>
                     <Route exact path="/:categoryId?" component={PostList}/>
                     <Route exact path="/posts/:postId" component={PostDetail}/>
-                    <Route exact path="/createPost" component={PostForm}/>
                 </Switch>
             </div>
         );
