@@ -9,10 +9,18 @@ class PostsApi {
         })
     }
 
+    getPost(postId) {
+        return this.instance.get('/posts/' + postId)
+            .then(function (response) {
+                return response.data
+            }).catch(function (error) {
+                console.log(error)
+            })
+    }
+
     getAllPosts() {
         return this.instance.get('/posts')
             .then(function (response) {
-                console.log(response.data)
                 return response.data
             }).catch(function (error) {
                 console.log(error)
@@ -22,7 +30,6 @@ class PostsApi {
     getPostsByCategory(category) {
         return this.instance.get('/' + category.name + '/posts')
             .then(function (response) {
-                console.log(response.data)
                 return response.data
             }).catch(function (error) {
                 console.log(error)

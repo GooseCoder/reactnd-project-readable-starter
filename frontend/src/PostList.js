@@ -1,14 +1,88 @@
 import React from 'react'
-import PostItem from "./PostItem";
+import { connect } from 'react-redux'
 
-const PostList = ({posts}) => {
-    return (
-        <div className="container is-fluid">
-            {posts.map(post => (
-                <PostItem key={post.id} {...post}/>
-            ))}
-        </div>
-    )
+import PostItem from "./PostItem";
+import CategoriesBar from "./CategoriesBar";
+import ToolBar from "./ToolBar";
+import {loadAllPosts} from "./actions/PostsActions";
+
+class PostList extends React.Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            postsOrder: 'votes',
+            activeCategory: {name: 'all', path: '/'}
+        }
+        this.sortPosts = this.sortPosts.bind(this)
+        this.handleDeletePost = this.handleDeletePost.bind(this)
+        this.handleVotePost = this.handleVotePost.bind(this)
+        this.handleSelectCategory = this.handleSelectCategory.bind(this)
+    }
+
+    componentDidMount() {
+        this.props.dispatch(loadAllPosts())
+    }
+
+    sortPosts = (orderOption) => {
+        console.log('sorting')
+        this.setState(() => ({postsOrder: orderOption}))
+    }
+
+    handleDeletePost = (post) => {
+        // this.props.dispatch(deletePost(post))
+        console.log('deleting')
+    }
+
+    handleVotePost = (id,vote) => {
+        // this.props.dispatch(votePost(id,vote))
+        console.log('voting')
+    }
+
+    handleSelectCategory = (category) => {
+        this.setState({
+            activeCategory: category
+        })
+    }
+
+    processPosts(posts, activeCategory, selectOrder){
+        return posts
+            .filter((a) => activeCategory.name === 'all' ? true : a.category === activeCategory.name)
+            .sort((f,s) => selectOrder === 'date' ? s.timestamp - f.timestamp : s.voteScore - f.voteScore )
+    }
+
+    render = () => {
+        const { posts } = this.props;
+        const processedPosts = this.processPosts(posts, this.state.activeCategory, this.state.postsOrder)
+
+        return (
+            <div>
+                <CategoriesBar
+                    categories={this.props.categories}
+                    activeCategory={this.state.activeCategory}
+                    handleSelectCategory={this.handleSelectCategory}
+                />
+                <ToolBar
+                    sortCriterias={['votes', 'date']}
+                    handleSorting={this.sortPosts}
+                    sortedBy={this.state.postsOrder}
+                />
+                <br/>
+                <div className="container is-fluid">
+                    {processedPosts.map(post => (
+                        <PostItem key={post.id} {...post}/>
+                    ))}
+                </div>
+            </div>
+        )
+    }
 }
 
-export default PostList
+function mapStateToProps ({ categories, posts, postsOrder, activeCategory }) {
+    return {
+        categories,
+        posts
+    }
+}
+
+export default connect(mapStateToProps)(PostList)

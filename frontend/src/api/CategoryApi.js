@@ -13,7 +13,6 @@ class CategoriesApi {
     getCategories() {
         return this.instance.get('/categories')
             .then(function (response) {
-                console.log(response.data.categories)
                 return response.data.categories
             }).catch(function (error) {
                 console.log(error)

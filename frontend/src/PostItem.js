@@ -1,6 +1,9 @@
 import React from 'react'
+import {
+    Link
+} from 'react-router-dom'
 
-const PostItem = ({title, body, author, category, voteScore}) => {
+const PostItem = ({title, body, author, category, voteScore, id}) => {
     return (
         <div className="card">
             <div className="card-content">
@@ -19,7 +22,11 @@ const PostItem = ({title, body, author, category, voteScore}) => {
                         </div>
                     </div>
                     <div className="media-content">
-                        <p className="title is-4">{title}</p>
+                        <p className="title is-4">
+                            <Link onClick={() => {console.log('from here')}} to={`/posts/${id}`}>
+                                {title}
+                            </Link>
+                        </p>
                         <p className="subtitle is-6">by {author}</p>
                     </div>
                 </div>

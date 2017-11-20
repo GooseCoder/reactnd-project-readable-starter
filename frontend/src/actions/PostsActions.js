@@ -5,6 +5,22 @@ export function loadPostsSuccess(posts) {
     return {type: types.LOAD_POSTS_SUCCESS, posts};
 }
 
+export function loadPostSuccess(currentPost) {
+    return {type: types.LOAD_POST_SUCCESS, currentPost};
+}
+
+export function loadPost(postId) {
+    // make async call to api, handle promise, dispatch action when promise is resolved
+    return function(dispatch) {
+        const postsApi = new PostsApi()
+        return postsApi.getPost(postId).then(currentPost => {
+            dispatch(loadPostSuccess(currentPost));
+        }).catch(error => {
+            throw(error);
+        });
+    };
+}
+
 export function loadAllPosts() {
     // make async call to api, handle promise, dispatch action when promise is resolved
     return function(dispatch) {
