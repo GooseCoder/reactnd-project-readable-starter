@@ -1,13 +1,16 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 const Header = ({title, company}) => {
     return (
         <section className="hero is-primary">
             <div className="hero-body">
                 <div className="container">
-                    <h1 className="title">
-                        {title}
-                    </h1>
+                    <Link to={`/`}>
+                        <h1 className="title">
+                            {title}
+                        </h1>
+                    </Link>
                     <h2 className="subtitle">
                         by {company}
                     </h2>

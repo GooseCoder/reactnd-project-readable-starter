@@ -8,7 +8,8 @@ export default function postsReducer(state = initialState.posts, action) {
             return state;
         case types.LOAD_POSTS_SUCCESS:
             return action.posts
-
+        case types.ADD_POST_SUCCESS:
+            return Object.assign([], state, action.post)
         default:
             return state;
     }

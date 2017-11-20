@@ -1,66 +1,37 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 
-const PostForm = () => {
+const PostForm = ({categories}) => {
     return (
             <div className="container is-fluid">
+                <span className='is-size-3'>Add a New Post</span>
+
                 <div className="field">
-                    <label className="label">Name</label>
-                    <div className="control">
+                    <label className="label">Title</label>
+                    <div className="control has-icons-left">
                         <input
                             className="input"
                             type="text"
-                            placeholder="Text input"
+                            placeholder="Title"
                         />
+                        <span className="icon is-small is-left">
+                            <i className="fa fa-edit"/>
+                        </span>
                     </div>
                 </div>
 
                 <div className="field">
-                    <label className="label">Username</label>
-                    <div className="control has-icons-left has-icons-right">
+                    <label className="label">Author</label>
+                    <div className="control has-icons-left">
                         <input
-                            className="input is-success"
+                            className="input"
                             type="text"
-                            placeholder="Text input"
+                            placeholder="Author"
                         />
                         <span className="icon is-small is-left">
-                        <i className="fa fa-user"/>
-                    </span>
-                        <span className="icon is-small is-right">
-                        <i className="fa fa-check"/>
-                    </span>
-                    </div>
-                    <p className="help is-success">This username is available</p>
-                </div>
-
-                <div className="field">
-                    <label className="label">Email</label>
-                    <div className="control has-icons-left has-icons-right">
-                        <input
-                            className="input is-danger"
-                            type="email"
-                            placeholder="Email input"
-                            value="hello@"
-                        />
-                        <span className="icon is-small is-left">
-                                <i className="fa fa-envelope"/>
-                            </span>
-                        <span className="icon is-small is-right">
-                                <i className="fa fa-warning"/>
-                            </span>
-                    </div>
-                    <p className="help is-danger">This email is invalid</p>
-                </div>
-
-                <div className="field">
-                    <label className="label">Subject</label>
-                    <div className="control">
-                        <div className="select">
-                            <select>
-                                <option>Select dropdown</option>
-                                <option>With options</option>
-                            </select>
-                        </div>
+                            <i className="fa fa-user"/>
+                        </span>
                     </div>
                 </div>
 
@@ -72,28 +43,38 @@ const PostForm = () => {
                 </div>
 
                 <div className="field">
+                    <label className="label">Category</label>
                     <div className="control">
-                        <label className="checkbox">
-                            <input type="checkbox"/>
-                            I agree to the <a href="#">terms and conditions</a>
-                        </label>
+                        <div className="select">
+                            <select>
+                                {categories
+                                    .filter(category => category.name !== 'all')
+                                    .map((category, key) => (
+                                        <option key={key}>
+                                            {category.name}
+                                        </option>
+                                ))}
+
+                            </select>
+                        </div>
                     </div>
                 </div>
 
-                <div className="field">
+                <div className="field is-grouped">
                     <div className="control">
-                        <label className="radio">
-                            <input type="radio" name="question"/>
-                            Yes
-                        </label>
-                        <label className="radio">
-                            <input type="radio" name="question"/>
-                            No
-                        </label>
+                        <button className="button is-link">Submit</button>
+                    </div>
+                    <div className="control">
+                        <Link className="button is-text" to={`/`}>Cancel</Link>
                     </div>
                 </div>
             </div>
     )
 }
 
-export default connect()(PostForm)
+function mapStateToProps ({ categories }) {
+    return {
+        categories
+    }
+}
+export default connect(mapStateToProps)(PostForm)

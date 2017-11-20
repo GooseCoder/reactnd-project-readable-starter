@@ -34,8 +34,8 @@ class PostList extends React.Component {
         console.log('deleting')
     }
 
-    handleVotePost = (id,vote) => {
-        // this.props.dispatch(votePost(id,vote))
+    handleVotePost = (id, vote) => {
+        // this.props.dispatch(votePost(id, vote))
         console.log('voting')
     }
 
@@ -70,7 +70,10 @@ class PostList extends React.Component {
                 <br/>
                 <div className="container is-fluid">
                     {processedPosts.map(post => (
-                        <PostItem key={post.id} {...post}/>
+                        <PostItem key={post.id} {...post}
+                            handleVotePost={this.handleVotePost}
+                            handleDeletePost={this.handleDeletePost}
+                        />
                     ))}
                 </div>
             </div>

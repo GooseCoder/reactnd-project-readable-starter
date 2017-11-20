@@ -2,7 +2,15 @@ const InitialState = {
     categories: [
         {name: 'all', path:''}
     ],
-    posts: []
+    posts: [],
+    currentPost: {
+        title: '',
+        author: '',
+        body: '',
+        category: '',
+        timestamp: 0
+    },
+    currentComments:[]
 }
 
 export default InitialState
