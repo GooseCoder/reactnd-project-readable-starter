@@ -18,10 +18,29 @@ class PostsApi {
             })
     }
 
+    deletePost(postId) {
+        return this.instance.delete('/posts/' + postId)
+            .then(function (response) {
+                return response.data
+            }).catch(function (error) {
+                console.log(error)
+            })
+    }
+
+    createPost(post) {
+        console.log('data', post);
+        return this.instance.post('/posts', {...post})
+            .then(function (response) {
+                return response.data
+            }).catch(function (error) {
+                console.log(error)
+            })
+    }
+
     getAllPosts() {
         return this.instance.get('/posts')
             .then(function (response) {
-                return response.data
+                return response.data.filter(post => !post.deleted)
             }).catch(function (error) {
                 console.log(error)
             })
@@ -41,7 +60,6 @@ class PostsApi {
                 option: vote
             })
             .then(function (response) {
-                console.log('voted', response.data)
                 return response.data
             }).catch(function (error) {
                 console.log(error)

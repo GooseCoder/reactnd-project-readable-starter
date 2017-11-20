@@ -13,6 +13,14 @@ export function votePostSuccess(post) {
     return {type: types.VOTE_POST_SUCCESS, post};
 }
 
+export function deletePostSuccess(post) {
+    return {type: types.DELETE_POST_SUCCESS, post};
+}
+
+export function createPostSuccess(post) {
+    return {type: types.CREATE_POST_SUCCESS, post};
+}
+
 export function loadPost(postId) {
     // make async call to api, handle promise, dispatch action when promise is resolved
     return function(dispatch) {
@@ -54,6 +62,30 @@ export function votePost(id, vote) {
         const postsApi = new PostsApi()
         return postsApi.votePost(id, vote).then(post => {
             dispatch(votePostSuccess(post));
+        }).catch(error => {
+            throw(error);
+        });
+    }
+}
+
+export function deletePost(postId) {
+    return function(dispatch) {
+        const postsApi = new PostsApi()
+        return postsApi.deletePost(postId).then(post => {
+            console.log('deleted', post)
+            dispatch(deletePostSuccess(post));
+        }).catch(error => {
+            throw(error);
+        });
+    }
+}
+
+export function createPost(post) {
+    return function(dispatch) {
+        const postsApi = new PostsApi()
+        return postsApi.createPost(post).then(post => {
+            console.log('created', post)
+            dispatch(createPostSuccess(post));
         }).catch(error => {
             throw(error);
         });

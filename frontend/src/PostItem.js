@@ -5,7 +5,7 @@ import {
     Link
 } from 'react-router-dom'
 
-import {loadPost, votePost} from "./actions/PostsActions";
+import {deletePost, loadPost, votePost} from "./actions/PostsActions";
 
 
 class PostItem extends React.Component {
@@ -13,6 +13,10 @@ class PostItem extends React.Component {
     handleVotePost = (id, vote) => {
         this.props.dispatch(votePost(id, vote))
         this.props.dispatch(loadPost(id))
+    }
+
+    handleDelete = (id) => {
+        this.props.dispatch(deletePost(id))
     }
 
     render = () => {
@@ -46,7 +50,7 @@ class PostItem extends React.Component {
                         </div>
                         <div className="media-content">
                             <p className="title is-4">
-                                <Link onClick={() => {console.log('from here')}} to={`/posts/${id}`}>
+                                <Link to={`/posts/${id}`}>
                                     {title}
                                 </Link>
                             </p>
@@ -77,21 +81,21 @@ class PostItem extends React.Component {
                             </Link>
                         </div>
                         <div className="level-right">
-                            <a className="button is-light">
-                            <span className="icon">
-                                <i className="fa fa-remove"/>
-                            </span>
-                                <span>
-                                Delete
-                            </span>
+                            <a className="button is-light" onClick={()=>this.handleDelete(id)}>
+                                <span className="icon">
+                                    <i className="fa fa-remove"/>
+                                </span>
+                                    <span>
+                                    Delete
+                                </span>
                             </a>
                             <a className="button is-light">
-                            <span className="icon">
-                                <i className="fa fa-edit"/>
-                            </span>
+                                <span className="icon">
+                                    <i className="fa fa-edit"/>
+                                </span>
                                 <span>
-                                Edit
-                            </span>
+                                    Edit
+                                </span>
                             </a>
                         </div>
                     </div>

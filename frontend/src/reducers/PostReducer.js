@@ -4,7 +4,6 @@ import initialState from '../InitialState';
 export default function postReducer(state = initialState.currentPost, action) {
     switch(action.type) {
         case types.LOAD_POST_SUCCESS:
-            console.log(Object.assign([], state, action.currentPost))
             return action.currentPost
         default:
             return state;

@@ -11,7 +11,8 @@ import '../node_modules/font-awesome/css/font-awesome.min.css';
 import Header from './Header'
 import PostList from './PostList'
 import PostDetail from './PostDetail'
-import PostForm from './PostForm';
+import PostFormEdit from "./PostFormEdit";
+import PostFormCreate from "./PostFormCreate";
 
 class App extends Component {
     render() {
@@ -20,8 +21,8 @@ class App extends Component {
                 <Header title="Readable" company="Gustavo Adolfo Cruz"/>
                 <br/>
                 <Switch>
-                    <Route exact path="/createPost" component={PostForm}/>
-                    <Route exact path="/editPost/:postId" component={PostForm}/>
+                    <Route exact path="/createPost" component={PostFormCreate}/>
+                    <Route exact path="/editPost/:postId" component={PostFormEdit}/>
                     <Route exact path="/:categoryId?" component={PostList}/>
                     <Route exact path="/posts/:postId" component={PostDetail}/>
                 </Switch>

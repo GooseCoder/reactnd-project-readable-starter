@@ -8,17 +8,18 @@ export default function postsReducer(state = initialState.posts, action) {
             return state;
         case types.LOAD_POSTS_SUCCESS:
             return action.posts
-        case types.ADD_POST_SUCCESS:
-            return Object.assign([], state, [action.post])
+        case types.CREATE_POST_SUCCESS:
+            return state.concat(action.post)
         case types.VOTE_POST_SUCCESS:
-            const posts = state.map(post => {
+            return state.map(post => {
                 if (post.id === action.post.id) {
                     return action.post
                 } else {
                     return post
                 }
             })
-            return posts
+        case types.DELETE_POST_SUCCESS:
+            return state.filter(post => action.post.id !== post.id)
         default:
             return state;
     }

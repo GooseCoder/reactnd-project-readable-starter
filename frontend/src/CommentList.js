@@ -35,10 +35,8 @@ class CommentList extends React.Component {
     }
 
     render = () => {
-
         const {currentComments} = this.props;
         const processComments = this.processComments(currentComments, this.state.commentsOrder)
-        console.log('comments', currentComments)
         return (
             <div className="container is-fluid">
                 {processComments.map(comment => (
