@@ -89,14 +89,14 @@ class PostItem extends React.Component {
                                     Delete
                                 </span>
                             </a>
-                            <a className="button is-light">
+                            <Link className="button is-light" to={`/editPost/${id}`}>
                                 <span className="icon">
                                     <i className="fa fa-edit"/>
                                 </span>
                                 <span>
                                     Edit
                                 </span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

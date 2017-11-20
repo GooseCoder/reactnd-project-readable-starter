@@ -10,6 +10,14 @@ export default function postsReducer(state = initialState.posts, action) {
             return action.posts
         case types.CREATE_POST_SUCCESS:
             return state.concat(action.post)
+        case types.EDIT_POST_SUCCESS:
+            return state.map(post => {
+                if (post.id === action.post.id) {
+                    return action.post
+                } else {
+                    return post
+                }
+            })
         case types.VOTE_POST_SUCCESS:
             return state.map(post => {
                 if (post.id === action.post.id) {

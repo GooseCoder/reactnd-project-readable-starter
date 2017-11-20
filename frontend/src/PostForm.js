@@ -6,13 +6,14 @@ import { connect } from 'react-redux'
 class  PostForm extends React.Component {
     constructor(props) {
         super(props)
+        console.log('init props', this.props)
         this.state = {
-            title: props.title || '',
-            author: props.author || '',
-            body: props.body || '',
-            category: props.category || '',
-            timestamp: props.timestamp || Date.now(),
-            id: props.id || uuid.v1()
+            title: '',
+            author:'',
+            body: '',
+            category: '',
+            timestamp: Date.now(),
+            id: uuid.v1()
         }
     }
 
@@ -23,8 +24,19 @@ class  PostForm extends React.Component {
         this.setState({[name]: value});
     }
 
+    componentWillReceiveProps(props) {
+        this.setState({
+            title: props.title,
+            body: props.body,
+            author: props.author,
+            category: props.category,
+            id: props.id? props.id: this.state.id,
+            timestamp: props.timestamp? props.timestamp: this.state.timestamp,
+        })
+    }
+
     render = () => {
-        const {categories, formTitle} = this.props
+        const {categories, formTitle, title, author, body, category} = this.props
         return (
             <div className="container is-fluid">
                 <span className='is-size-3'>{formTitle}</span>
@@ -36,6 +48,7 @@ class  PostForm extends React.Component {
                             name="title"
                             type="text"
                             placeholder="Title"
+                            value={this.state.title}
                             onChange={(event) => this.handleInputChange(event)}
                         />
                         <span className="icon is-small is-left">
@@ -52,6 +65,7 @@ class  PostForm extends React.Component {
                             name="author"
                             type="text"
                             placeholder="Author"
+                            value={this.state.author}
                             onChange={(event) => this.handleInputChange(event)}
                         />
                         <span className="icon is-small is-left">
@@ -67,6 +81,7 @@ class  PostForm extends React.Component {
                             className="textarea"
                             name="body"
                             placeholder="Body"
+                            value={this.state.body}
                             onChange={(event) => this.handleInputChange(event)}
                         />
                     </div>
@@ -78,7 +93,7 @@ class  PostForm extends React.Component {
                         <div className="select">
                             <select
                                 name="category"
-                                defaultValue=""
+                                value={this.state.category}
                                 onChange={(event) => this.handleInputChange(event)}
                             >
                                 <option disabled value="">Select a category</option>

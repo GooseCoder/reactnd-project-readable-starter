@@ -37,6 +37,17 @@ class PostsApi {
             })
     }
 
+    editPost(post) {
+        console.log('edit-data', post);
+        return this.instance.put('/posts/' + post.id, {title: post.title, body: post.body})
+            .then(function (response) {
+                console.log('edit-response =>', response);
+                return response.data
+            }).catch(function (error) {
+                console.log(error)
+            })
+    }
+
     getAllPosts() {
         return this.instance.get('/posts')
             .then(function (response) {
