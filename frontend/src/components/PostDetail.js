@@ -1,16 +1,34 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 import {loadPost} from "../actions/PostsActions";
 import PostItem from "./PostItem";
 import CommentList from "./CommentList";
 
 class PostDetail extends React.Component {
-    componentDidMount() {
+    constructor(props) {
+        super(props)
+        this.state = {
+            redirect: false,
+        }
+    }
+
+    componentDidMount = () => {
         this.props.dispatch(loadPost(this.props.match.params.postId))
     }
 
+    componentWillReceiveProps(props) {
+        if (!props.currentPost.id) {
+            this.setState({
+                redirect: true
+            })
+        }
+    }
+
     render = () => {
+        if (this.state.redirect) {
+            return <Redirect push to="/" />;
+        }
         return (
             <div className={`container is-fluid`}>
                 <PostItem {...this.props.currentPost}/>
@@ -24,12 +42,12 @@ class PostDetail extends React.Component {
                     <div className="level-right">
                         <div className="level-item">
                             <Link to={`/createComment/${this.props.match.params.postId}`} className='button is-success'>
-                            <span className="icon">
-                                <i className="fa fa-plus"/>
-                            </span>
+                        <span className="icon">
+                            <i className="fa fa-plus"/>
+                        </span>
                                 <span>
-                                Add Comment
-                            </span>
+                            Add Comment
+                        </span>
                             </Link>
                         </div>
                     </div>
