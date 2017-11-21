@@ -2,13 +2,19 @@ import React from 'react'
 import {connect} from 'react-redux'
 import moment from 'moment'
 import {
-    Link
+    Link, Redirect
 } from 'react-router-dom'
 
 import {deletePost, loadPost, votePost} from "../actions/PostsActions";
 
 
 class PostItem extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            redirect: false
+        }
+    }
 
     handleVotePost = (id, vote) => {
         this.props.dispatch(votePost(id, vote))
@@ -17,10 +23,16 @@ class PostItem extends React.Component {
 
     handleDelete = (id) => {
         this.props.dispatch(deletePost(id))
+        this.setState({
+            redirect: true
+        })
     }
 
     render = () => {
-        const {title, body, author, category, voteScore, timestamp, id} = this.props
+        const {title, body, author, category, voteScore, timestamp, id, commentsNumber} = this.props
+        if (this.state.redirect) {
+            return <Redirect push to="/" />;
+        }
         return (
             <div className="card">
                 <div className="card-content">
@@ -50,7 +62,7 @@ class PostItem extends React.Component {
                         </div>
                         <div className="media-content">
                             <p className="title is-4">
-                                <Link to={`/posts/${id}`}>
+                                <Link to={`/${category}/${id}`}>
                                     {title}
                                 </Link>
                             </p>
@@ -71,12 +83,12 @@ class PostItem extends React.Component {
 
                     <div className="level">
                         <div className="level-left">
-                            <Link className="button is-light" to={`/posts/${id}`}>
+                            <Link className="button is-light" to={`/${category}/${id}`}>
                             <span className="icon">
                                 <i className="fa fa-comment"/>
                             </span>
                                 <span>
-                                Comment
+                                Comments ({commentsNumber})
                             </span>
                             </Link>
                         </div>

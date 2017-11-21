@@ -5,6 +5,10 @@ export function loadCommentsSuccess(currentComments) {
     return {type: types.LOAD_COMMENTS_SUCCESS, currentComments};
 }
 
+export function loadAllCommentsSuccess(currentComments) {
+    return {type: types.LOAD_ALL_COMMENTS_SUCCESS, currentComments};
+}
+
 export function voteCommentSuccess(comment) {
     return {type: types.VOTE_COMMENT_SUCCESS, comment};
 }
@@ -31,6 +35,18 @@ export function loadComments(postId) {
         const commentsApi = new CommentsApi()
         return commentsApi.getComments(postId).then(currentComments => {
             dispatch(loadCommentsSuccess(currentComments));
+        }).catch(error => {
+            throw(error);
+        });
+    };
+}
+
+export function loadAllComments(postId) {
+    // make async call to api, handle promise, dispatch action when promise is resolved
+    return function(dispatch) {
+        const commentsApi = new CommentsApi()
+        return commentsApi.getAllComments().then(comments => {
+            dispatch(loadAllCommentsSuccess(comments));
         }).catch(error => {
             throw(error);
         });
