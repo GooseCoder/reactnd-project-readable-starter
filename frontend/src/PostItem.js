@@ -28,7 +28,7 @@ class PostItem extends React.Component {
                         <div className="media-left">
                             <div className="level">
                                 <div className="level-left">
-                                    <div className="level-item vote-count-positive is-size-4">
+                                    <div className={`level-item is-size-4 ${voteScore>=0?'vote-count-positive':'vote-count-negative'}`}>
                                         {voteScore}
                                     </div>
                                     <div className="level-item fa fa-stack">

@@ -20,7 +20,6 @@ class PostFormEdit extends React.Component {
     }
 
     handleSubmitData(post) {
-        console.log('edit a post', post);
         this.props.dispatch(editPost(post))
         this.setState({
             redirect: true
@@ -31,7 +30,6 @@ class PostFormEdit extends React.Component {
         if (this.state.redirect) {
             return <Redirect push to="/" />;
         }
-        console.log('post loaded to edit', this.props.currentPost);
         return (
             <PostForm
                 formTitle="Edit Post"

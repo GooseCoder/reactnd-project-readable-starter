@@ -4,7 +4,7 @@ import initialState from '../InitialState';
 export default function postsReducer(state = initialState.currentComment, action) {
     switch(action.type) {
         case types.LOAD_COMMENT_SUCCESS:
-            return action.currentComment
+            return action.comment
         default:
             return state;
     }

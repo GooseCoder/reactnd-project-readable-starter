@@ -48,6 +48,24 @@ class CommentsApi {
             })
     }
 
+    loadComment(commentId) {
+        return this.instance.get('/comments/' + commentId)
+            .then(function (response) {
+                return response.data
+            }).catch(function (error) {
+                console.log(error)
+            })
+    }
+
+    editComment(comment) {
+        return this.instance.put('/comments/' + comment.id, {body: comment.body, timestamp: comment.timestamp})
+            .then(function (response) {
+                return response.data
+            }).catch(function (error) {
+                console.log(error)
+            })
+    }
+
 }
 
 export default CommentsApi

@@ -15,7 +15,6 @@ class PostList extends React.Component {
             activeCategory: {name: 'all', path: '/'}
         }
         this.sortPosts = this.sortPosts.bind(this)
-        this.handleDeletePost = this.handleDeletePost.bind(this)
         this.handleSelectCategory = this.handleSelectCategory.bind(this)
     }
 
@@ -24,13 +23,7 @@ class PostList extends React.Component {
     }
 
     sortPosts = (orderOption) => {
-        console.log('sorting')
         this.setState(() => ({postsOrder: orderOption}))
-    }
-
-    handleDeletePost = (post) => {
-        // this.props.dispatch(deletePost(post))
-        console.log('deleting')
     }
 
     handleSelectCategory = (category) => {
@@ -64,9 +57,7 @@ class PostList extends React.Component {
                 <br/>
                 <div className="container is-fluid">
                     {processedPosts.map(post => (
-                        <PostItem key={post.id} {...post}
-                            handleDeletePost={this.handleDeletePost}
-                        />
+                        <PostItem key={post.id} {...post}/>
                     ))}
                 </div>
             </div>

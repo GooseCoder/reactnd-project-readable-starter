@@ -7,10 +7,8 @@ class  CommentForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: '',
-            author:'',
             body: '',
-            category: '',
+            author:'',
             timestamp: Date.now(),
             parentId: props.postId,
             id: uuid.v1()

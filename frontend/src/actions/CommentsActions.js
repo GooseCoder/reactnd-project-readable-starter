@@ -17,6 +17,14 @@ export function createCommentSuccess(comment) {
     return {type: types.CREATE_COMMENT_SUCCESS, comment};
 }
 
+export function loadCommentSuccess(comment) {
+    return {type: types.LOAD_COMMENT_SUCCESS, comment};
+}
+
+export function editCommentSuccess(comment) {
+    return {type: types.EDIT_COMMENT_SUCCESS, comment};
+}
+
 export function loadComments(postId) {
     // make async call to api, handle promise, dispatch action when promise is resolved
     return function(dispatch) {
@@ -56,6 +64,28 @@ export function createComment(comment) {
         const commentsApi = new CommentsApi()
         return commentsApi.createComment(comment).then(comment => {
             dispatch(createCommentSuccess(comment));
+        }).catch(error => {
+            throw(error);
+        });
+    }
+}
+
+export function loadComment(id) {
+    return function(dispatch) {
+        const commentsApi = new CommentsApi()
+        return commentsApi.loadComment(id).then(comment => {
+            dispatch(loadCommentSuccess(comment));
+        }).catch(error => {
+            throw(error);
+        });
+    }
+}
+
+export function editComment(comment) {
+    return function(dispatch) {
+        const commentsApi = new CommentsApi()
+        return commentsApi.editComment(comment).then(comment => {
+            dispatch(editCommentSuccess(comment));
         }).catch(error => {
             throw(error);
         });

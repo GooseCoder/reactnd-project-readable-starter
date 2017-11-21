@@ -5,9 +5,16 @@ export default function postsReducer(state = initialState.currentComments, actio
     switch(action.type) {
         case types.LOAD_COMMENTS_SUCCESS:
             return action.currentComments
+        case types.EDIT_COMMENT_SUCCESS:
+            return state.map(comment => {
+                if (comment.id === action.comment.id) {
+                    return action.comment
+                } else {
+                    return comment
+                }
+            })
         case types.VOTE_COMMENT_SUCCESS:
             return state.map(comment => {
-                console.log('action', action)
                 if (comment.id === action.comment.id) {
                     return action.comment
                 } else {

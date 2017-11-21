@@ -76,7 +76,6 @@ export function deletePost(postId) {
     return function(dispatch) {
         const postsApi = new PostsApi()
         return postsApi.deletePost(postId).then(post => {
-            console.log('deleted', post)
             dispatch(deletePostSuccess(post));
         }).catch(error => {
             throw(error);
@@ -88,7 +87,6 @@ export function createPost(post) {
     return function(dispatch) {
         const postsApi = new PostsApi()
         return postsApi.createPost(post).then(post => {
-            console.log('created', post)
             dispatch(createPostSuccess(post));
         }).catch(error => {
             throw(error);
@@ -100,7 +98,6 @@ export function editPost(post) {
     return function(dispatch) {
         const postsApi = new PostsApi()
         return postsApi.editPost(post).then(post => {
-            console.log('edited', post)
             dispatch(editPostSuccess(post));
         }).catch(error => {
             throw(error);

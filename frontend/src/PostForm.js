@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 class  PostForm extends React.Component {
     constructor(props) {
         super(props)
-        console.log('init props', this.props)
         this.state = {
             title: '',
             author:'',

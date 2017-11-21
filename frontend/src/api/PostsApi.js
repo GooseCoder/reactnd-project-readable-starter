@@ -28,7 +28,6 @@ class PostsApi {
     }
 
     createPost(post) {
-        console.log('data', post);
         return this.instance.post('/posts', {...post})
             .then(function (response) {
                 return response.data
@@ -38,10 +37,8 @@ class PostsApi {
     }
 
     editPost(post) {
-        console.log('edit-data', post);
         return this.instance.put('/posts/' + post.id, {title: post.title, body: post.body})
             .then(function (response) {
-                console.log('edit-response =>', response);
                 return response.data
             }).catch(function (error) {
                 console.log(error)

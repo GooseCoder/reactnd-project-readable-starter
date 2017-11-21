@@ -11,22 +11,10 @@ class CommentList extends React.Component {
         this.state = {
             commentsOrder: 'votes'
         }
-        this.handleDeleteComment = this.handleDeleteComment.bind(this)
-        this.handleVoteComment = this.handleVoteComment.bind(this)
     }
 
     componentDidMount() {
         this.props.dispatch(loadComments(this.props.postId))
-    }
-
-    handleDeleteComment = (post) => {
-        // this.props.dispatch(deletePost(post))
-        console.log('deleting comment')
-    }
-
-    handleVoteComment = (id,vote) => {
-        // this.props.dispatch(votePost(id,vote))
-        console.log('voting comment')
     }
 
     processComments(comments, selectOrder){
