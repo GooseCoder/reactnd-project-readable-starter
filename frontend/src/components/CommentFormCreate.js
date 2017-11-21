@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 
 import CommentForm from "./CommentForm";
-import {createComment} from "./actions/CommentsActions";
+import {createComment} from "../actions/CommentsActions";
 
 class CommentFormCreate extends React.Component {
 

@@ -4,9 +4,9 @@ import {
     Route, Switch, withRouter
 } from 'react-router-dom'
 
-import './App.css';
-import '../node_modules/bulma/css/bulma.css';
-import '../node_modules/font-awesome/css/font-awesome.min.css';
+import '../App.css';
+import '../../node_modules/bulma/css/bulma.css';
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 import Header from './Header'
 import PostList from './PostList'

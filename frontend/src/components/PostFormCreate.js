@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 
 import PostForm from "./PostForm";
-import {createPost} from "./actions/PostsActions";
+import {createPost} from "../actions/PostsActions";
 
 class PostFormCreate extends React.Component {
 

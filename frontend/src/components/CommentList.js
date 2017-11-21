@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import CommentItem from "./CommentItem";
-import {loadComments} from "./actions/CommentsActions";
+import {loadComments} from "../actions/CommentsActions";
 
 class CommentList extends React.Component {
 

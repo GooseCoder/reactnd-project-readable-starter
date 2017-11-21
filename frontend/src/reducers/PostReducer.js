@@ -1,5 +1,5 @@
 import * as types from '../actions/ActionTypes';
-import initialState from '../InitialState';
+import initialState from '../components/InitialState';
 
 export default function postReducer(state = initialState.currentPost, action) {
     switch(action.type) {

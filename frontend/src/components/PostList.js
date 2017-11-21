@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import PostItem from "./PostItem";
 import CategoriesBar from "./CategoriesBar";
 import ToolBar from "./ToolBar";
-import {loadAllPosts} from "./actions/PostsActions";
+import {loadAllPosts} from "../actions/PostsActions";
 
 class PostList extends React.Component {
 

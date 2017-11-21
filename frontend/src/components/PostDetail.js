@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {loadPost} from "./actions/PostsActions";
+import {loadPost} from "../actions/PostsActions";
 import PostItem from "./PostItem";
 import CommentList from "./CommentList";
 

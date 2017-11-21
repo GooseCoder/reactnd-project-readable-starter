@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 
-import CommentForm from "./CommentForm";
-import {editComment, loadComment} from "./actions/CommentsActions";
+import PostForm from "./PostForm";
+import {editPost, loadPost} from "../actions/PostsActions";
 
-class CommentFormEdit extends React.Component {
+class PostFormEdit extends React.Component {
 
     constructor(props) {
         super(props)
@@ -16,11 +16,11 @@ class CommentFormEdit extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(loadComment(this.props.match.params.commentId))
+        this.props.dispatch(loadPost(this.props.match.params.postId))
     }
 
-    handleSubmitData(comment) {
-        this.props.dispatch(editComment(comment))
+    handleSubmitData(post) {
+        this.props.dispatch(editPost(post))
         this.setState({
             redirect: true
         })
@@ -28,10 +28,10 @@ class CommentFormEdit extends React.Component {
 
     render = () => {
         if (this.state.redirect) {
-            return <Redirect push to={`/posts/${this.props.currentComment.parentId}`} />;
+            return <Redirect push to="/" />;
         }
         return (
-            <CommentForm
+            <PostForm
                 formTitle="Edit Post"
                 handleSubmitData={this.handleSubmitData}
             />
@@ -39,10 +39,10 @@ class CommentFormEdit extends React.Component {
     }
 }
 
-function mapStateToProps ({ currentComment }) {
+function mapStateToProps ({ currentPost }) {
     return {
-        currentComment
+        currentPost
     }
 }
 
-export default connect(mapStateToProps)(CommentFormEdit)
+export default connect(mapStateToProps)(PostFormEdit)

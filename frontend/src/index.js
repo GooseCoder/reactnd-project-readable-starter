@@ -8,9 +8,9 @@ import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 import './index.css'
-import App from './App'
+import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
-import initialState from './InitialState'
+import initialState from './components/InitialState'
 import {loadCategories} from "./actions/CategoriesActions";
 import {loadAllPosts} from "./actions/PostsActions";
 
