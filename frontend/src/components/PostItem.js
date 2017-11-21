@@ -6,13 +6,14 @@ import {
 } from 'react-router-dom'
 
 import {deletePost, loadPost, votePost} from "../actions/PostsActions";
-
+import CommentsApi from "../api/CommentsApi";
 
 class PostItem extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            redirect: false
+            redirect: false,
+            commentsCount: 0
         }
     }
 
@@ -28,8 +29,27 @@ class PostItem extends React.Component {
         })
     }
 
+    updateCounters(id) {
+        const commentsApi = new CommentsApi()
+        commentsApi.getComments(id).then(currentComments => {
+            this.setState({
+                commentsCount: currentComments.length
+            });
+        }).catch(error => {
+            throw(error);
+        });
+    }
+
+    componentDidMount() {
+        this.updateCounters(this.props.id)
+    }
+
+    componentWillReceiveProps(props) {
+        this.updateCounters(props.id)
+    }
+
     render = () => {
-        const {title, body, author, category, voteScore, timestamp, id, commentsNumber} = this.props
+        const {title, body, author, category, voteScore, timestamp, id} = this.props
         if (this.state.redirect) {
             return <Redirect push to="/" />;
         }
@@ -88,7 +108,7 @@ class PostItem extends React.Component {
                                 <i className="fa fa-comment"/>
                             </span>
                                 <span>
-                                Comments ({commentsNumber})
+                                Comments ({this.state.commentsCount})
                             </span>
                             </Link>
                         </div>

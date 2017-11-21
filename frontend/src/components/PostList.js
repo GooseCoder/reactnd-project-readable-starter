@@ -39,13 +39,13 @@ class PostList extends React.Component {
     }
 
     render = () => {
-        const { posts } = this.props;
+        const { posts, categories } = this.props;
         const processedPosts = this.processPosts(posts, this.state.activeCategory, this.state.postsOrder)
 
         return (
             <div>
                 <CategoriesBar
-                    categories={this.props.categories}
+                    categories={categories}
                     activeCategory={this.state.activeCategory}
                     handleSelectCategory={this.handleSelectCategory}
                 />
@@ -65,7 +65,7 @@ class PostList extends React.Component {
     }
 }
 
-function mapStateToProps ({ categories, posts, postsOrder, activeCategory }) {
+function mapStateToProps ({ categories, posts }) {
     return {
         categories,
         posts
