@@ -13,6 +13,7 @@ import PostList from './PostList'
 import PostDetail from './PostDetail'
 import PostFormEdit from "./PostFormEdit";
 import PostFormCreate from "./PostFormCreate";
+import CommentFormCreate from "./CommentFormCreate";
 
 class App extends Component {
     render() {
@@ -23,6 +24,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/createPost" component={PostFormCreate}/>
                     <Route exact path="/editPost/:postId" component={PostFormEdit}/>
+                    <Route exact path="/createComment" component={CommentFormCreate}/>
                     <Route exact path="/:categoryId?" component={PostList}/>
                     <Route exact path="/posts/:postId" component={PostDetail}/>
                 </Switch>

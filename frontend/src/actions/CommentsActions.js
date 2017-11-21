@@ -5,6 +5,18 @@ export function loadCommentsSuccess(currentComments) {
     return {type: types.LOAD_COMMENTS_SUCCESS, currentComments};
 }
 
+export function voteCommentSuccess(comment) {
+    return {type: types.VOTE_COMMENT_SUCCESS, comment};
+}
+
+export function deleteCommentSuccess(comment) {
+    return {type: types.DELETE_COMMENT_SUCCESS, comment};
+}
+
+export function createCommentSuccess(comment) {
+    return {type: types.CREATE_COMMENT_SUCCESS, comment};
+}
+
 export function loadComments(postId) {
     // make async call to api, handle promise, dispatch action when promise is resolved
     return function(dispatch) {
@@ -15,4 +27,37 @@ export function loadComments(postId) {
             throw(error);
         });
     };
+}
+
+export function voteComment(id, vote) {
+    return function(dispatch) {
+        const commentsApi = new CommentsApi()
+        return commentsApi.voteComment(id, vote).then(comment => {
+            dispatch(voteCommentSuccess(comment));
+        }).catch(error => {
+            throw(error);
+        });
+    }
+}
+
+export function deleteComment(id) {
+    return function(dispatch) {
+        const commentsApi = new CommentsApi()
+        return commentsApi.deleteComment(id).then(comment => {
+            dispatch(deleteCommentSuccess(comment));
+        }).catch(error => {
+            throw(error);
+        });
+    }
+}
+
+export function createComment(comment) {
+    return function(dispatch) {
+        const commentsApi = new CommentsApi()
+        return commentsApi.createComment(comment).then(comment => {
+            dispatch(createCommentSuccess(comment));
+        }).catch(error => {
+            throw(error);
+        });
+    }
 }
