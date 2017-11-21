@@ -24,7 +24,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/createPost" component={PostFormCreate}/>
                     <Route exact path="/editPost/:postId" component={PostFormEdit}/>
-                    <Route exact path="/createComment" component={CommentFormCreate}/>
+                    <Route exact path="/createComment/:postId" component={CommentFormCreate}/>
                     <Route exact path="/:categoryId?" component={PostList}/>
                     <Route exact path="/posts/:postId" component={PostDetail}/>
                 </Switch>

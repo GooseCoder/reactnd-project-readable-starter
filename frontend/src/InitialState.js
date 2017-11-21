@@ -10,6 +10,10 @@ const InitialState = {
         category: '',
         timestamp: 0
     },
+    currentComment: {
+        body: '',
+        author: ''
+    },
     currentComments:[]
 }
 

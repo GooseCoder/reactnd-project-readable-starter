@@ -36,7 +36,6 @@ class PostFormEdit extends React.Component {
             <PostForm
                 formTitle="Edit Post"
                 handleSubmitData={this.handleSubmitData}
-                {...this.props.currentPost}
             />
         )
     }

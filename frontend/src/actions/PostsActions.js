@@ -27,7 +27,6 @@ export function editPostSuccess(post) {
 
 export function loadPost(postId) {
     // make async call to api, handle promise, dispatch action when promise is resolved
-    console.log('loading post');
     return function(dispatch) {
         const postsApi = new PostsApi()
         return postsApi.getPost(postId).then(currentPost => {

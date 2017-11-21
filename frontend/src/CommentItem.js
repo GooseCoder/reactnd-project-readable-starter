@@ -1,16 +1,13 @@
 import React from 'react'
 import moment from 'moment'
 import {connect} from 'react-redux'
-import {
-    Link
-} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {deleteComment, voteComment} from "./actions/CommentsActions";
 
 class CommentItem extends React.Component {
 
     handleVoteComment = (id, vote) => {
         this.props.dispatch(voteComment(id, vote))
-        // this.props.dispatch(loadComment(id))
     }
 
     handleDelete = (id) => {
@@ -67,14 +64,14 @@ class CommentItem extends React.Component {
                                     Delete
                                 </span>
                             </a>
-                            <a className="button is-light">
+                            <Link className="button is-light" to={`/editComment/${id}`}>
                                 <span className="icon">
                                     <i className="fa fa-edit"/>
                                 </span>
                                 <span>
                                     Edit
                                 </span>
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

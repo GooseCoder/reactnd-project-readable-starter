@@ -17,26 +17,19 @@ class  PostForm extends React.Component {
         }
     }
 
-    handleInputChange(event) {
+    handleInputChange = (event) => {
         const target = event.target;
         const name = target.name;
         const value = target.value;
         this.setState({[name]: value});
     }
 
-    componentWillReceiveProps(props) {
-        this.setState({
-            title: props.title,
-            body: props.body,
-            author: props.author,
-            category: props.category,
-            id: props.id? props.id: this.state.id,
-            timestamp: props.timestamp? props.timestamp: this.state.timestamp,
-        })
+    componentWillReceiveProps = (props) => {
+        this.setState(props.currentPost)
     }
 
     render = () => {
-        const {categories, formTitle, title, author, body, category} = this.props
+        const {categories, formTitle} = this.props
         return (
             <div className="container is-fluid">
                 <span className='is-size-3'>{formTitle}</span>
@@ -49,7 +42,7 @@ class  PostForm extends React.Component {
                             type="text"
                             placeholder="Title"
                             value={this.state.title}
-                            onChange={(event) => this.handleInputChange(event)}
+                            onChange={this.handleInputChange}
                         />
                         <span className="icon is-small is-left">
                             <i className="fa fa-edit"/>
@@ -66,7 +59,7 @@ class  PostForm extends React.Component {
                             type="text"
                             placeholder="Author"
                             value={this.state.author}
-                            onChange={(event) => this.handleInputChange(event)}
+                            onChange={this.handleInputChange}
                         />
                         <span className="icon is-small is-left">
                             <i className="fa fa-user"/>
@@ -82,7 +75,7 @@ class  PostForm extends React.Component {
                             name="body"
                             placeholder="Body"
                             value={this.state.body}
-                            onChange={(event) => this.handleInputChange(event)}
+                            onChange={this.handleInputChange}
                         />
                     </div>
                 </div>
@@ -94,7 +87,7 @@ class  PostForm extends React.Component {
                             <select
                                 name="category"
                                 value={this.state.category}
-                                onChange={(event) => this.handleInputChange(event)}
+                                onChange={this.handleInputChange}
                             >
                                 <option disabled value="">Select a category</option>
                                 {categories
@@ -127,9 +120,10 @@ class  PostForm extends React.Component {
     }
 }
 
-function mapStateToProps ({ categories }) {
+function mapStateToProps ({ categories, currentPost }) {
     return {
-        categories
+        categories,
+        currentPost
     }
 }
 export default connect(mapStateToProps)(PostForm)

@@ -24,9 +24,13 @@ class CommentFormCreate extends React.Component {
 
     render = () => {
         if (this.state.redirect) {
-            return <Redirect push to="/" />;
+            return <Redirect push to={`/posts/${this.props.match.params.postId}`} />;
         }
-        return (<CommentForm formTitle="Add a New Post" handleSubmitData={this.handleSubmitData}/>)
+        return (<CommentForm
+            formTitle="Add a New Comment"
+            handleSubmitData={this.handleSubmitData}
+            postId={this.props.match.params.postId}
+        />)
     }
 }
 

@@ -23,7 +23,7 @@ class PostDetail extends React.Component {
                     </div>
                     <div className="level-right">
                         <div className="level-item">
-                            <Link to={`/createComment`} className='button is-success'>
+                            <Link to={`/createComment/${this.props.match.params.postId}`} className='button is-success'>
                             <span className="icon">
                                 <i className="fa fa-plus"/>
                             </span>
